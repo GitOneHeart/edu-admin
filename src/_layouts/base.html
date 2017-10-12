@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学IT - 后台管理系统</title>
+    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="vendor/nprogress/nprogress.css">
+   <!-- link的部分 -->
+    <link rel="stylesheet" href="./css/index.css">
+    {% block head %} {% endblock %}
+</head>
+<body>
+    {% include "../_partials/header.html" %}
+    <!-- 主体 -->
+    <div class="main">
+         {% include "../_partials/sidebar.html" %}
+         <!--这里存放页面自己的内容  -->
+         {% block body %}
+         {% endblock %}
+    </div>
+   
+    <script src="vendor/jquery/dist/jquery.js"></script>
+    <script src="vendor/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="vendor/nprogress/nprogress.js"></script>
+    <script src="vendor/echarts/dist/echarts.js"></script>
+    <script src="./js/common.js"></script>
+    {% block script %}
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>学IT - 后台管理系统</title>
+  <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+  <!-- 登录 -->
+  <div class="login">
+    <div class="login-wrap">
+      <div class="avatar">
+        <img src="img/monkey.png" class="img-circle" alt="">
+      </div>
+      <form id="form" action="" class="col-md-offset-1 col-md-10">
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon">
+                        <i class="fa fa-user"></i>
+                    </span>
+          <input type="text" class="form-control" name="tc_name" placeholder="用户名">
+        </div>
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon">
+                        <i class="fa fa-key"></i>
+                    </span>
+          <input type="password" class="form-control" name="tc_pass" placeholder="密码">
+        </div>
+        <button type="submit" class="btn btn-lg btn-primary btn-block">登 录</button>
+      </form>
+    </div>
+  </div>
+  <!-- <script src="vendor/jquery/dist/jquery.js"></script>
+  <script src="vendor/bootstrap/dist/js/bootstrap.js"></script> -->
+  <script src="vendor/requirejs/require.js"></script>
+  <script>
+    
+    // requirejs(['./js/foo'], function (foo) {
+    //   // 我要使用 jQuery
+    //   console.log(foo)
+    // })
+
+    // 注意：这里我们把所有的第三方包通过 requirejs.config 的方式都配置起来
+    //  1. 可以解决加载第三方包路径过长的问题
+    //  2. 可以解决某些第三方包起了名字无法加载的问题
+    // 这里有个约定，把所有的第三方包都配置到这个 paths 中
+    // paths 是一个对象，对象中是键值对，键就是起个名字，值就是第三方包的模块路径
+    requirejs.config({
+      paths: {
+        jquery: 'vendor/jquery/dist/jquery'
+      }
+    })
+
+    requirejs(['jquery'], function ($) {
+      // 当表单提交的时候，执行对应的处理函数
+      // 1. 阻止默认请求行为
+      // 2. 提取表单数据
+      // 3. 发起 ajax 异步请求登陆
+      // 4. 根据响应结果做交互处理
+      $('#form').on('submit', function (e) {
+        e.preventDefault()
+        // jQuery 的 serialize 方法会把表单中所有具有 name 的表单控件元素提取到，解析得到：xx=xx&xx=xx 的格式数据
+        var formData = $(this).serialize()
+        $.ajax({
+          url: '/api/login', // 
+          type: 'post',
+          data: formData,
+          dataType: 'json',
+          success: function (data) {
+            console.log(data)
+          },
+          error: function () {
+            
+          }
+        })
+      })
+    })
+
+    // Page 类
+    // new Page({
+    //   // 页面初始化的时候做什么
+    //   init: function () {
+        
+    //   },
+    //   // 把所有的方法都写到 methods 中
+    //   methods: {
+    //     handleA: function () {
+          
+    //     }
+    //   },
+    //   // 把所有的事件绑定都写到一个位置
+    //   bindEvents: function () {
+    //     $('a').on('click', methods.handleA)
+    //   }
+    // })
+
+
+  </script>
+</body>
+
+</html>
